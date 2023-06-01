@@ -1,0 +1,4 @@
+div#navbarScroll li.nav-item:hover {
+    background-color: #2c4dcf;
+    transition: all 0.1s ease-in-out;
+}
