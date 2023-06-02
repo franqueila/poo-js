@@ -24,6 +24,24 @@ document.getElementById("taskForm").addEventListener("submit", (e) => {
 
     const ui = new UI();
 
+    const validatedForm = ui.validateForm(tarea);
+    if (!validatedForm) {
+        return ui.message(
+            "Por favor, rellene todos los campos",
+            "danger",
+            3000
+        );
+    }
+
     ui.addTask(tarea);
     ui.message("¡Tarea agregada con éxito!", "success", 3000);
+    ui.resetForm();
+});
+
+document.getElementById("taskList").addEventListener("click", (e) => {
+    const tarea = e.target.parentElement.parentElement;
+    const ui = new UI();
+    if (e.target.name === "delete") {
+        ui.deleteTask(tarea);
+    }
 });
