@@ -1,3 +1,7 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const supabase = createClient(supabaseUrl, supabaseKey);
+
 function signInForm() {
     document.getElementById("formTitle").innerText = "Iniciar Sesión";
     const authForm = document.getElementById("authForm");
@@ -46,7 +50,7 @@ document.getElementById("authForm").addEventListener("submit", (e) => {
     }
 });
 
-function signUp() {
+async function signUp() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const passwordConfirm = document.getElementById("passwordConfirm").value;
@@ -58,29 +62,54 @@ function signUp() {
 
     if (password === passwordConfirm) {
         // Registrar con Supabase
-        /*
-        supabase.auth
-            .signup(email, password)
+        await supabase.auth
+            .signUp({
+                email: email,
+                password: password,
+            })
             .then((response) => {
-                console.log("Usuario registrado correctamente:", response.user);
-                // Realizar acciones adicionales después del registro exitoso
+                let user = response.data.user;
+                if (user) {
+                    window.location.href = "/";
+                } else if (user === null) {
+                    //poner este mensaje en un toast
+                    console.log("Credenciales no válidas");
+                }
             })
             .catch((error) => {
                 console.error("Error al registrar usuario:", error);
             });
-            */
     } else {
+        //poner este mensaje en un toast
         console.log("Contraseñas no coinciden");
     }
 }
 
-function signIn() {
+async function signIn() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
     if (email === "" || password === "") {
-        console.log("Campos vacíos");
+        //poner este mensaje en un toast
+        console.log("Por favor rellene todos los campos");
         return;
     }
     //logease con supabase
+    await supabase.auth
+        .signInWithPassword({
+            email: email,
+            password: password,
+        })
+        .then((response) => {
+            let user = response.data.user;
+            if (user) {
+                window.location.href = "/";
+            } else if (user === null) {
+                //poner este mensaje en un toast
+                console.log("Credenciales no válidas");
+            }
+        })
+        .catch((error) => {
+            console.error("Error al logear usuario:", error);
+        });
 }

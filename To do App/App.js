@@ -1,5 +1,8 @@
 import { Tarea } from "./models/Tarea.js";
 import { UI } from "./models/UI.js";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 document.getElementById("taskForm").addEventListener("submit", (e) => {
     e.preventDefault();
@@ -44,4 +47,10 @@ document.getElementById("taskList").addEventListener("click", (e) => {
     if (e.target.name === "delete") {
         ui.deleteTask(tarea);
     }
+});
+
+document.getElementById("signOut").addEventListener("click", (e) => {
+    e.preventDefault();
+    supabase.auth.signOut();
+    window.location.href = "auth/auth.html";
 });
