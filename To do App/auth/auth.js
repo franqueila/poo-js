@@ -1,6 +1,3 @@
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-console / log(supabase);
-
 function signInForm() {
     document.getElementById("formTitle").innerText = "Iniciar Sesión";
     const authForm = document.getElementById("authForm");
@@ -60,7 +57,18 @@ function signUp() {
     }
 
     if (password === passwordConfirm) {
-        //Registrarse con supabase
+        // Registrar con Supabase
+        /*
+        supabase.auth
+            .signup(email, password)
+            .then((response) => {
+                console.log("Usuario registrado correctamente:", response.user);
+                // Realizar acciones adicionales después del registro exitoso
+            })
+            .catch((error) => {
+                console.error("Error al registrar usuario:", error);
+            });
+            */
     } else {
         console.log("Contraseñas no coinciden");
     }
