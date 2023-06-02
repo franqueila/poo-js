@@ -1,0 +1,26 @@
+body{
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+a{
+    text-decoration: none;
+}
+#app, .form-auth{
+    height: 100vh;
+}
+
+#authImages{
+    background-image: url(./../img/login1.avif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+    z-index: -1;
+}
